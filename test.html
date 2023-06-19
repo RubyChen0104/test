@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>輸入和傳遞訊息</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<label for="message">輸入訊息：</label>
+<input type="text" id="message" placeholder="在這裡輸入訊息">
+<button onclick="sendMessage()">傳送</button>
+
+<script>
+    function sendMessage() {
+        var url = 'http://140.134.53.58/~D1051929/';  // 替換為代理服务器的URL
+        var messageInput = document.getElementById('message');
+        var message = messageInput.value;
+        var data = {
+            question: message
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(function(response) {
+                if (response.ok) {
+                    // 請求成功
+                    alert('資料成功傳送到URL！');
+                } else {
+                    // 請求失敗
+                    alert('資料傳送失敗！');
+                }
+            })
+            .catch(function(error) {
+                // 請求出現錯誤
+                alert('請求錯誤：' + error.message);
+            });
+    }
+</script>
+</body>
+</html>
